@@ -1,0 +1,16 @@
+﻿@model List<Category>
+
+  <div class="card" style="width: 18rem;">
+      
+    </div
+
+
+@foreach(var category in Model)
+{
+    <img src="https://www.marketingturkiye.com.tr/wp-content/uploads/2018/01/spor-m%C3%BCzik.jpg" class="card-img-top" alt="Spor">
+    <div class="card-body">
+    <h5 class="card-title">@category.CategoryName</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a asp-controller="Category" asp-action="Blogs" class="btn btn-primary">Go Blogs</a>
+    </div>
+}
