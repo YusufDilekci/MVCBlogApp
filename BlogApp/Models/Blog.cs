@@ -8,6 +8,6 @@ namespace BlogApp.Models
         public int CategoryId { get; set; }
         public string BlogTitle { get; set;}
         public string BlogContent { get; set;}
-        public Category Category { get; set; }
+        public virtual Category? Category { get; set; }
     }
 }

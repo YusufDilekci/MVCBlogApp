@@ -1,16 +1,29 @@
 ﻿@model List<Category>
 
-  <div class="card" style="width: 18rem;">
+ 
       
-    </div
+   
+<h1>Categories</h1>
+
+<a class="btn btn-primary" href="/Category/AddCategory" role="button">
+    <span class="button__text">Add Category</span>
+    <span class="button__icon">
+        <ion-icon name="add-outline"></ion-icon>
+    </span>    
+</a>
+
 
 
 @foreach(var category in Model)
 {
-    <img src="https://www.marketingturkiye.com.tr/wp-content/uploads/2018/01/spor-m%C3%BCzik.jpg" class="card-img-top" alt="Spor">
-    <div class="card-body">
-    <h5 class="card-title">@category.CategoryName</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a asp-controller="Category" asp-action="Blogs" class="btn btn-primary">Go Blogs</a>
+    <div class="card" style="width: 18rem;">
+        <img src="images/@category.CategoryImage" class="card-img-top" alt="@category.CategoryName">
+        <div class="card-body">
+        <h5 class="card-title">@category.CategoryName</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/Category/Blogs?categoryId=@category.CategoryId" class="btn btn-primary">Go Blogs</a>
+        </div>
     </div>
 }
+
+

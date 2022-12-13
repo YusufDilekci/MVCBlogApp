@@ -17,6 +17,19 @@ body {
   margin-bottom: 60px;
 }
 
-button{
+button {
+   
     margin-top: 30px;
 }
+.button__text,
+.button__icon{
+    display : inline-flex;
+    align-items: center;
+    padding : 0 10px;
+    height : 100%;
+   
+}
+.button__icon{
+    font-size : 1.5em;
+}
+

@@ -4,8 +4,9 @@ namespace BlogApp.ViewModel
 {
     public class BlogCategoryModel
     {
-        public Blog Blog { get; set; }
-        public List<Category> Categories { get; set; }
-        public Category Category { get; set; }
+        public int BlogId { get; set; }
+        public string BlogTitle { get; set; }
+        public string BlogContent { get; set; }
+        public string CategoryName { get; set; }
     }
 }

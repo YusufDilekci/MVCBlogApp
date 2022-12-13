@@ -1,11 +1,20 @@
 ﻿using BlogApp.Models;
 using BlogApp.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Controllers
 {
+    
     public class BlogController : Controller
     {
+        private readonly BlogContext _context;
+        public BlogController(BlogContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -14,44 +23,55 @@ namespace BlogApp.Controllers
         [HttpGet]
         public IActionResult WriteBlog()
         {
-            using (BlogContext context = new BlogContext())
-            {
-                var categories = context.Categories.ToList();
 
-                var blogCategoryModel = new BlogCategoryModel();
-                
-                blogCategoryModel.Categories= categories;
-                return View(blogCategoryModel);
-            }
+                var categories = _context.Categories;
+
+                ViewBag.Categories = categories.ToList();
+                return View();
+            
             
 
         }
 
         [HttpPost]
-        public IActionResult WriteBlog(BlogCategoryModel blogCategoryModel)
+        [ValidateAntiForgeryToken]
+        public IActionResult WriteBlog(Blog blog)
         {
-            using (BlogContext context = new BlogContext())
-            {
+ 
+                if (ModelState.IsValid)
+                {
+                    _context.Blogs.Add(blog);
+                    _context.SaveChanges();
 
-                //var category = context.Categories.Where(i => i.CategoryName == blogCategoryModel.Category.CategoryName)
-                //    .SingleOrDefault();
+                    return View("Success");
 
-                //category.Blogs.Add(blogCategoryModel.Blog);
-                //context.SaveChanges();
-            }
-            return RedirectToAction("Index");
+                }
+               
+                return View("Error");
+                
+            
         }
 
         public IActionResult GetAll()
         {
-            return View();
+           
+            var blogs = _context.Blogs.Select(i => new BlogCategoryModel
+            {
+                BlogId= i.BlogId,
+                BlogTitle = i.BlogTitle,
+                BlogContent = i.BlogContent,
+                CategoryName = i.Category.CategoryName
+            }).ToList();
+
+            return View(blogs);
+
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-            return View();
+            var blog = _context.Blogs.Where(i => i.BlogId== id).SingleOrDefault();
+            return View(blog);
         }
-
       
 
     }

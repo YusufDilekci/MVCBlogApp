@@ -7,7 +7,8 @@ namespace BlogApp.Models
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
-        public List<Blog> Blogs { get; set; }
+        public string CategoryImage { get; set; }
+        public virtual ICollection<Blog>? Blogs { get; set; }
 
     }
 }
